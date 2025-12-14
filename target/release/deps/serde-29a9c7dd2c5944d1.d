@@ -1,0 +1,14 @@
+/home/jdean/gitops/apps/security/vaultwarden/rotation/rotator_helper/target/release/deps/libserde-29a9c7dd2c5944d1.rmeta: /home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs /home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs /home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs /home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs /home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs /home/jdean/gitops/apps/security/vaultwarden/rotation/rotator_helper/target/release/build/serde-a56ff4672fc18443/out/private.rs
+
+/home/jdean/gitops/apps/security/vaultwarden/rotation/rotator_helper/target/release/deps/libserde-29a9c7dd2c5944d1.rlib: /home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs /home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs /home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs /home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs /home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs /home/jdean/gitops/apps/security/vaultwarden/rotation/rotator_helper/target/release/build/serde-a56ff4672fc18443/out/private.rs
+
+/home/jdean/gitops/apps/security/vaultwarden/rotation/rotator_helper/target/release/deps/serde-29a9c7dd2c5944d1.d: /home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs /home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs /home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs /home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs /home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs /home/jdean/gitops/apps/security/vaultwarden/rotation/rotator_helper/target/release/build/serde-a56ff4672fc18443/out/private.rs
+
+/home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs:
+/home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs:
+/home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs:
+/home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs:
+/home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs:
+/home/jdean/gitops/apps/security/vaultwarden/rotation/rotator_helper/target/release/build/serde-a56ff4672fc18443/out/private.rs:
+
+# env-dep:OUT_DIR=/home/jdean/gitops/apps/security/vaultwarden/rotation/rotator_helper/target/release/build/serde-a56ff4672fc18443/out

@@ -1,0 +1,21 @@
+version: v1
+secrets:
+  - name: test-hook-secret
+    vaultwarden:
+      cipherId: "00000000-0000-0000-0000-000000000000" # Placeholder
+      name: "test-hook-secret"
+    kubernetes:
+      namespace: default
+      secretName: test-hook-secret
+      path: tests/sealed-test-hook.yaml
+    keys:
+      - name: password
+        type: random
+        length: 12
+    hooks:
+      pre:
+        - command: "scripts/test_hook.sh"
+          args: ["pre-hook", "executed"]
+      post:
+        - command: "scripts/test_hook.sh"
+          args: ["post-hook", "executed"]

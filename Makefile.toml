@@ -1,0 +1,56 @@
+[tasks.build]
+description = "Build the project in release mode"
+command = "cargo"
+args = ["build", "--release"]
+
+[tasks.check]
+description = "Run cargo check"
+command = "cargo"
+args = ["check"]
+
+[tasks.test]
+description = "Run tests"
+command = "cargo"
+args = ["test"]
+
+[tasks.rotate]
+description = "Run rotation in scan mode (Real Run)"
+command = "cargo"
+args = ["run", "--", "rotate", "--scan"]
+
+[tasks.rotate-debug]
+description = "Run real rotation with debug logs (Affects Vaultwarden)"
+command = "cargo"
+args = ["run", "--", "rotate", "--scan", "--debug"]
+
+[tasks.rotate-dry]
+description = "Run rotation in dry-run mode"
+command = "cargo"
+args = ["run", "--", "rotate", "--scan", "--dry-run"]
+
+[tasks.scaffold]
+description = "Scaffold a new rotation.yaml (Usage: cargo make scaffold -- --app myapp --env prod)"
+command = "cargo"
+args = ["run", "--", "scaffold", "${@}"]
+
+[tasks.docker-build]
+description = "Build the Docker image"
+command = "docker"
+args = ["build", "-t", "rotato:latest", "."]
+
+[tasks.deploy]
+description = "Apply Kubernetes manifests"
+script = [
+    "kubectl apply -f manifests/cronjob.yaml"
+]
+
+[tasks.all]
+description = "Build and run dry-run rotation"
+dependencies = ["build", "rotate-dry"]
+
+[tasks.get-password]
+description = "Retrieve password by username/email (e.g., cargo make get-password -- --user admin@example.com)"
+script = '''
+if [ "$1" = "--" ]; then shift; fi
+cargo run -- find "$@"
+'''

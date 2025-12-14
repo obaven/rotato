@@ -1,0 +1,97 @@
+digraph VaultwardenRotator {
+    rankdir = LR;
+    node [shape = box; style = filled; fontname = "Arial";];
+    
+    // External Systems
+    subgraph cluster_external {
+        label = "External Systems";
+        style = dashed;
+        color = gray;
+        
+        VaultwardenServer [label = "Vaultwarden Server";fillcolor = "#ffcccc";];
+        Kubernetes [label = "Kubernetes Cluster";fillcolor = "#ccffcc";];
+        
+        subgraph cluster_git {
+            label = "Git Repository";
+            style = solid;
+            color = "#ccccff";
+            
+            GitRepo [label = "Git History";fillcolor = "#e6e6ff";];
+            AppDirs [label = "App Directories\n(apps/*/rotation.yaml)";shape = folder;fillcolor = "#ffffcc";];
+        }
+    }
+    
+    // Rotato Application
+    subgraph cluster_app {
+        label = "Rotato (Internal)";
+        style = filled;
+        color = "#e6f3ff";
+        
+        CLI [label = "CLI Entry Point\n(main.rs)";fillcolor = "#ffffff";];
+        
+        // Command Layer
+        subgraph cluster_commands {
+            label = "Orchestration Layer";
+            style = filled;
+            color = "#eeeeee";
+            RotateCmd [label = "Rotate Command\n(commands/rotate.rs)";fillcolor = "#ddffdd";];
+            ScaffoldCmd [label = "Scaffold Command\n(commands/scaffold.rs)";fillcolor = "#ddffdd";];
+        }
+        
+        // Logic Layer
+        subgraph cluster_logic {
+            label = "Domain Logic (Pure)";
+            style = filled;
+            color = "#ccffcc";
+            
+            ResLogic [label = "Resolution\n(logic/resolution.rs)\n[Collections & Folders]";fillcolor = "#ffffff";];
+            PolicyLogic [label = "Policy\n(logic/policy.rs)";fillcolor = "#ffffff";];
+            ParseLogic [label = "Parsing\n(logic/parsing.rs)";fillcolor = "#ffffff";];
+        }
+        
+        // Infra Layer
+        subgraph cluster_infra {
+            label = "Infrastructure Adapters";
+            style = filled;
+            color = "#ffcccc";
+            
+            K8sAdapter [label = "K8s Adapter\n(infra/k8s.rs)";fillcolor = "#ffffff";];
+            GitAdapter [label = "Git Adapter\n(infra/git.rs)";fillcolor = "#ffffff";];
+            FsAdapter [label = "FS Adapter\n(infra/fs.rs)";fillcolor = "#ffffff";];
+            RandAdapter [label = "Random Gen\n(infra/random.rs)";fillcolor = "#ffffff";];
+        }
+        
+        AuthFlow [label = "Auth Flow\n(flows.rs)";fillcolor = "#ddffdd";];
+        Crypto [label = "Crypto Module\n(crypto.rs)";fillcolor = "#ffdddd";];
+    }
+    
+    // Flow Connections
+    CLI -> RotateCmd [label = "Dispatch";];
+    CLI -> ScaffoldCmd [label = "Dispatch";];
+    
+    // Rotate Command Dependencies
+    RotateCmd -> ResLogic [label = "Uses";];
+    RotateCmd -> PolicyLogic [label = "Uses";];
+    RotateCmd -> ParseLogic [label = "Uses";];
+    
+    RotateCmd -> K8sAdapter [label = "Injects"; style = dashed;];
+    RotateCmd -> GitAdapter [label = "Injects"; style = dashed;];
+    RotateCmd -> FsAdapter [label = "Injects"; style = dashed;];
+    RotateCmd -> RandAdapter [label = "Injects"; style = dashed;];
+    
+    RotateCmd -> AuthFlow [label = "Auth";];
+    RotateCmd -> Crypto [label = "Encrypt";];
+    
+    // Adapter Connections
+    K8sAdapter -> Kubernetes [label = "Kubectl";];
+    GitAdapter -> GitRepo [label = "Git CLI";];
+    FsAdapter -> AppDirs [label = "Read";];
+    
+    // Direct Calls
+    ScaffoldCmd -> AppDirs [label = "Write YAML";];
+    
+    // Logic -> Infra (Via Dependency Injection, conceptually)
+    ResLogic -> FsAdapter [label = "Calls (via closure)"; style = dotted;];
+    ResLogic -> K8sAdapter [label = "Calls (via closure)"; style = dotted;];
+    ResLogic -> RandAdapter [label = "Calls (via closure)"; style = dotted;];
+}

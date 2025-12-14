@@ -1,0 +1,106 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: vaultwarden-rotator
+  namespace: vaultwarden-prod
+spec:
+  schedule: "0 3 * * *" # Daily at 3 AM
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: vaultwarden-rotator
+          containers:
+          - name: rotator
+            image: vaultwarden-rotator:latest # REPLACE WITH YOUR REGISTRY IMAGE
+            imagePullPolicy: IfNotPresent
+            env:
+            - name: GIT_REPO_URL
+              value: "git@github.com:obaven/gitops.git"
+            - name: BW_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: vaultwarden-credentials
+                  key: email
+            - name: BW_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: vaultwarden-credentials
+                  key: password
+            - name: BW_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: vaultwarden-credentials
+                  key: client_id
+            - name: BW_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: vaultwarden-credentials
+                  key: client_secret
+            volumeMounts:
+            - name: ssh-key
+              mountPath: "/etc/secret-volume"
+              readOnly: true
+          volumes:
+          - name: ssh-key
+            secret:
+              secretName: gitops-deploy-key # Need to create this
+              defaultMode: 0400
+          restartPolicy: OnFailure
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: vaultwarden-rotator
+  namespace: vaultwarden-prod
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: secret-reader
+  namespace: vaultwarden-prod 
+  # Note: Ideally this needs to read secrets in ALL namespaces involved in rotation.
+  # So we probably need a ClusterRole.
+rules:
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["get", "list"]
+  verbs: ["get", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: pod-executor
+rules:
+- apiGroups: [""]
+  resources: ["pods/exec"]
+  verbs: ["create"]
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: vaultwarden-rotator-read-secrets
+subjects:
+- kind: ServiceAccount
+  name: vaultwarden-rotator
+  namespace: vaultwarden-prod
+roleRef:
+  kind: ClusterRole
+  name: view # Use default view role or custom secret-reader
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: vaultwarden-rotator-exec
+subjects:
+- kind: ServiceAccount
+  name: vaultwarden-rotator
+  namespace: vaultwarden-prod
+roleRef:
+  kind: ClusterRole
+  name: pod-executor
+  apiGroup: rbac.authorization.k8s.io

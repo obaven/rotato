@@ -1,0 +1,78 @@
+version: "0.1.0"
+secrets:
+- name: rotator-ssh-key
+  env: null
+  vaultwarden:
+    cipherId: 255e0a40-4479-4989-a63a-9fc4673457f2
+    collectionIds: null
+    collections:
+    - cicd
+    folder: Cicd
+    notes: SSH key for Rotator Bot to push to Git
+  keys:
+  - name: private_key
+    type: static
+    length: null
+    value: |
+      -----BEGIN OPENSSH PRIVATE KEY-----
+      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
+      -----END OPENSSH PRIVATE KEY-----
+    generator: null
+  kubernetes:
+    namespace: vaultwarden-prod
+    path: apps/cicd/github/sealed_secrets/sealed-rotator-ssh-key.yaml
+    secretName: rotator-git-ssh-key
+  sourceFiles: null
+  namespace: null
+  secretName: null
+  argocdApp: null
+  notes: null
+  repo: null
+  path: null
+  accessUsers: null

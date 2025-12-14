@@ -1,0 +1,85 @@
+# Vaultwarden rotation config (example)
+# Copy to config.yaml and fill in repo/paths before running the workflow.
+#
+# Each entry describes one application+environment secret set to rotate.
+# - name: logical id
+# - env: dev|prod|stage|...
+# - repo: git URL with push access
+# - path: sealed secret file to overwrite (relative to repo root)
+# - namespace: target K8s namespace
+# - secretName: name of the K8s Secret (pre-sealed)
+# - keys: list of keys to rotate (will be generated and sealed)
+# - notes: optional text added to Vaultwarden item
+#
+# The workflow will:
+# - generate a new secret (>=600 bits, >=32 chars)
+# - preserve the previous value in Vaultwarden item (notes/fields)
+# - update the sealed secret file and push directly to main
+# - trigger argocd app sync for the listed app (if provided)
+
+secrets:
+  - name: vaultwarden
+    env: prod
+    repo: git@github.com:obaven/vaultwarden.git
+    path: overlays/prod/sealed_secrets/sealed-vaultwarden-env.yaml
+    namespace: vaultwarden-prod
+    secretName: vaultwarden-env
+    keys: [ADMIN_TOKEN]
+    argocdApp: vaultwarden-prod
+    notes: "Admin token rotation"
+
+  - name: vaultwarden
+    env: dev
+    repo: git@github.com:obaven/vaultwarden.git
+    path: overlays/dev/sealed_secrets/sealed-vaultwarden-env.yaml
+    namespace: vaultwarden-dev
+    secretName: vaultwarden-env
+    keys: [ADMIN_TOKEN]
+    argocdApp: vaultwarden-dev
+
+  - name: forgejo
+    env: prod
+    repo: git@github.com:obaven/forgejo.git
+    path: overlays/prod/components/sealed_secrets/sealed-forgejo-admin-credentials.yaml
+    namespace: forgejo-prod
+    secretName: forgejo-admin-credentials
+    keys: [password]
+    argocdApp: forgejo-prod
+    notes: "Admin password rotation"
+
+  - name: authentik
+    env: prod
+    repo: git@github.com:obaven/authentik.git
+    path: overlays/prod/components/sealed_secrets/sealed-authentik-admin-credentials.yaml
+    namespace: authentik-prod
+    secretName: authentik-admin-credentials
+    keys: [password]
+    argocdApp: authentik-prod
+    notes: "Admin password rotation"
+
+  - name: redis
+    env: prod
+    repo: git@github.com:obaven/redis.git
+    path: overlays/prod/components/sealed_secrets/sealed-redis-admin-credentials.yaml
+    namespace: redis-prod
+    secretName: redis-admin-credentials
+    keys: [password]
+    argocdApp: redis-prod
+
+  - name: postgres
+    env: prod
+    repo: git@github.com:obaven/postgres.git
+    path: overlays/prod/components/sealed_secrets/sealed-postgresql-admin-credentials.yaml
+    namespace: postgresql-prod
+    secretName: postgresql-admin-credentials
+    keys: [password]
+    argocdApp: postgresql-prod
+
+  - name: argocd
+    env: prod
+    repo: git@github.com:obaven/argocd.git
+    path: overlays/main/components/sealed_secrets/sealed-argocd-admin-credentials.yaml
+    namespace: argocd
+    secretName: argocd-admin-credentials
+    keys: [password]
+    argocdApp: argocd

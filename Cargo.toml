@@ -1,0 +1,35 @@
+[package]
+name = "rotato"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0"
+clap = { version = "4.4", features = ["derive", "env"] }
+reqwest = { version = "0.11", features = ["json", "blocking", "cookies"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+serde_yaml = "0.9"
+tokio = { version = "1.0", features = ["full"] }
+futures = "0.3"
+aes = "0.8"
+cbc = "0.1"
+hmac = "0.12"
+sha2 = "0.10"
+pbkdf2 = { version = "0.12", features = ["simple"] }
+hkdf = "0.12"
+base64 = "0.21"
+rpassword = "7.0"
+rand = "0.8"
+chrono = "0.4"
+hex = "0.4.3"
+rsa = "0.9.9"
+sha1 = "0.10.6"
+argon2 = "0.5"
+walkdir = "2.4"
+backoff = { version = "0.4.0", features = ["tokio"] }
+colored = "3.0.0"
+tempfile = "3.8"
+
+[dev-dependencies]
+tempfile = "3.8"

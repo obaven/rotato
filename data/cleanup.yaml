@@ -1,0 +1,10 @@
+secrets:
+  - name: vaultwarden-test-admin-credentials
+    vaultwarden:
+      name: vaultwarden/prod-rotation
+  - name: authentik-prod-admin-credentials
+    vaultwarden:
+      name: authentik/prod-rotation
+  - name: forgejo-prod-db-admin-credentials
+    vaultwarden:
+      name: forgejo/prod-rotation

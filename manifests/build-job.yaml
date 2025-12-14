@@ -1,0 +1,72 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: rotator-builder
+  namespace: vaultwarden-prod
+spec:
+  # backoffLimit: 0 # Fail fast if needed, but let's stick to default
+  template:
+    spec:
+      restartPolicy: Never
+      tolerations:
+      - key: node.kubernetes.io/disk-pressure
+        operator: Exists
+        effect: NoSchedule
+      initContainers:
+      - name: wait-for-upload
+        image: busybox
+        command:
+        - /bin/sh
+        - -c
+        - |
+          echo "Waiting for build context upload..."
+          while [ ! -f /workspace/UPLOAD_COMPLETE ]; do sleep 2; done
+          echo "Upload complete. Proceeding..."
+        volumeMounts:
+        - name: workspace
+          mountPath: /workspace
+        resources:
+          requests:
+            cpu: 20m
+            memory: 64Mi
+          limits:
+            cpu: 100m
+            memory: 64Mi
+      containers:
+      - name: kaniko
+        securityContext:
+          privileged: true
+        image: gcr.io/kaniko-project/executor:debug
+        command:
+        - /bin/sh
+        - -c
+        - |
+          ulimit -n 65536
+          /kaniko/executor --context=dir:///workspace --dockerfile=Dockerfile --destination=harbor.obaven.org/library/rotato:latest --snapshotMode=time
+        args: []
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "20m"
+          limits:
+            memory: "1024Mi"
+            cpu: "500m"
+        volumeMounts:
+        - name: workspace
+          mountPath: /workspace
+        - name: kaniko-secret
+          mountPath: /kaniko/.docker
+      volumes:
+      - name: workspace
+        hostPath:
+          path: /mnt/postgres-data-0/rotator-build-workspace-rust-nightly-v6
+          type: DirectoryOrCreate
+      - name: ssh-key
+        secret:
+          secretName: rotator-git-ssh-key
+          items:
+          - key: private_key
+            path: ssh-privatekey
+      - name: kaniko-secret
+        secret:
+          secretName: kaniko-secret

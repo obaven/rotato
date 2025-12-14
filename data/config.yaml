@@ -1,0 +1,821 @@
+secrets:
+- name: vaultwarden
+  env: prod
+  vaultwarden:
+    cipherId: 89f053b4-de32-4ff4-a735-d0272d5ff67d
+    collectionIds:
+    - 58e4e413-cf24-4d00-bb55-8b8bfbabbac7
+    collections: null
+    folder: Vaultwarden
+    notes: vaultwarden prod admin token
+  keys:
+  - ADMIN_TOKEN
+  sourceFiles: null
+  namespace: vaultwarden-prod
+  secretName: vaultwarden-env
+  argocdApp: vaultwarden-prod
+  notes: Admin token rotation
+  repo: https://github.com/obaven/vaultwarden.git
+  path: overlays/prod/sealed_secrets/sealed-vaultwarden-env.yaml
+  accessUsers: null
+- name: vaultwarden
+  env: dev
+  vaultwarden:
+    cipherId: ec819c50-2628-45ec-8c99-6b1e45455315
+    collectionIds:
+    - 7d44037c-8026-4660-959f-cac29589d21b
+    collections: null
+    folder: Vaultwarden
+    notes: vaultwarden dev admin token
+  keys:
+  - ADMIN_TOKEN
+  sourceFiles: null
+  namespace: vaultwarden-dev
+  secretName: vaultwarden-env
+  argocdApp: vaultwarden-dev
+  notes: null
+  repo: https://github.com/obaven/vaultwarden.git
+  path: overlays/dev/sealed_secrets/sealed-vaultwarden-env.yaml
+  accessUsers: null
+- name: forgejo
+  env: prod
+  vaultwarden:
+    cipherId: ef80d5dc-b29f-4d38-b5e9-0f06110455d6
+    collectionIds:
+    - fdb8d418-f020-43ec-8902-81fed5523e4b
+    collections: null
+    folder: Forgejo
+    notes: null
+  keys:
+  - password
+  sourceFiles: null
+  namespace: forgejo-prod
+  secretName: forgejo-admin-credentials
+  argocdApp: forgejo-prod
+  notes: Admin password rotation
+  repo: https://github.com/obaven/forgejo.git
+  path: overlays/prod/components/sealed_secrets/sealed-forgejo-admin-credentials.yaml
+  accessUsers: null
+- name: authentik
+  env: prod
+  vaultwarden:
+    cipherId: 65885138-1dba-44c6-80a2-b2ac3b8cedee
+    collectionIds:
+    - 1ee437f3-aade-4aab-80e6-eeeb8b31e969
+    collections: null
+    folder: Authentik
+    notes: null
+  keys:
+  - password
+  sourceFiles: null
+  namespace: authentik-prod
+  secretName: authentik-admin-credentials
+  argocdApp: authentik-prod
+  notes: Admin password rotation
+  repo: https://github.com/obaven/authentik.git
+  path: overlays/prod/components/sealed_secrets/sealed-authentik-admin-credentials.yaml
+  accessUsers: null
+- name: redis
+  env: prod
+  vaultwarden:
+    cipherId: da282178-7d63-4073-8e1b-a46051016837
+    collectionIds:
+    - 95987c70-ee37-41dc-9a96-7c4c6c41642a
+    collections: null
+    folder: Redis
+    notes: null
+  keys:
+  - password
+  sourceFiles: null
+  namespace: redis-prod
+  secretName: redis-admin-credentials
+  argocdApp: redis-prod
+  notes: null
+  repo: https://github.com/obaven/redis.git
+  path: overlays/prod/components/sealed_secrets/sealed-redis-admin-credentials.yaml
+  accessUsers: null
+- name: postgres
+  env: prod
+  vaultwarden:
+    cipherId: f330bf88-94c5-4d87-9188-2b3780ee2bb3
+    collectionIds:
+    - 6547e076-4f26-4d8b-80b3-c4ba20d2a3db
+    collections: null
+    folder: Postgres
+    notes: null
+  keys:
+  - password
+  sourceFiles: null
+  namespace: postgresql-prod
+  secretName: postgresql-admin-credentials
+  argocdApp: postgresql-prod
+  notes: null
+  repo: https://github.com/obaven/postgres.git
+  path: overlays/prod/components/sealed_secrets/sealed-postgresql-admin-credentials.yaml
+  accessUsers: null
+- name: argocd
+  env: prod
+  vaultwarden:
+    cipherId: b11957de-dfe5-48c0-b8f9-896583dfb878
+    collectionIds:
+    - 1d606569-7c86-48ba-af38-ad9220d3546a
+    collections: null
+    folder: ArgoCD
+    notes: null
+  keys:
+  - password
+  sourceFiles: null
+  namespace: argocd
+  secretName: argocd-admin-credentials
+  argocdApp: argocd
+  notes: null
+  repo: https://github.com/obaven/argocd.git
+  path: overlays/main/sealed_secrets/prod/sealed-argocd-admin-credentials.yaml
+  accessUsers: null
+- name: postgres
+  env: dev
+  vaultwarden:
+    cipherId: cf52da07-5823-4ae1-bf19-2f96042c02d4
+    collectionIds:
+    - 094b0be9-83b0-4f5e-ba10-4a8b10688619
+    collections: null
+    folder: Postgres
+    notes: null
+  keys:
+  - password
+  sourceFiles: null
+  namespace: postgresql-dev
+  secretName: postgresql-admin-credentials
+  argocdApp: postgresql-dev
+  notes: null
+  repo: https://github.com/obaven/postgres.git
+  path: overlays/dev/components/sealed_secrets/sealed-postgresql-admin-credentials.yaml
+  accessUsers: null
+- name: redis
+  env: dev
+  vaultwarden:
+    cipherId: d3f90c86-9338-4fdd-9b75-604a374e1279
+    collectionIds:
+    - 306c4fb4-88c6-40c3-b99c-0c930d480a54
+    collections: null
+    folder: Redis
+    notes: null
+  keys:
+  - password
+  sourceFiles: null
+  namespace: redis-dev
+  secretName: redis-admin-credentials
+  argocdApp: redis-dev
+  notes: null
+  repo: https://github.com/obaven/redis.git
+  path: overlays/dev/components/sealed_secrets/sealed-redis-admin-credentials.yaml
+  accessUsers: null
+- name: authentik
+  env: dev
+  vaultwarden:
+    cipherId: 421f13f1-de07-4e38-946c-47399a092a41
+    collectionIds:
+    - 2aab4003-b924-4849-9ebc-5ae645425c80
+    collections: null
+    folder: Authentik
+    notes: null
+  keys:
+  - AUTHENTIK_BOOTSTRAP_PASSWORD
+  sourceFiles: null
+  namespace: authentik-dev
+  secretName: authentik-config-secrets
+  argocdApp: authentik-dev
+  notes: null
+  repo: https://github.com/obaven/authentik.git
+  path: overlays/dev/sealed_secrets/sealed-authentik-config-secrets.yaml
+  accessUsers: null
+- name: harbor
+  env: prod
+  vaultwarden:
+    cipherId: 483c8bcb-5568-4b04-8593-96a2b1e09bd3
+    collectionIds:
+    - ebd07933-11b4-4e57-82af-28bbef09c5d6
+    collections: null
+    folder: Harbor
+    notes: null
+  keys:
+  - password
+  - username
+  sourceFiles: null
+  namespace: harbor-prod
+  secretName: harbor-admin-credentials
+  argocdApp: harbor-oci-registry-prod
+  notes: null
+  repo: https://github.com/obaven/harbor-oci-registry.git
+  path: overlays/prod/sealed_secrets/sealed-harbor-admin-credentials.yaml
+  accessUsers: null
+- name: harbor
+  env: dev
+  vaultwarden:
+    cipherId: 1a7fa9de-30e0-4fe5-96a2-03e153d3bdb2
+    collectionIds:
+    - ebd07933-11b4-4e57-82af-28bbef09c5d6
+    collections: null
+    folder: Harbor
+    notes: null
+  keys:
+  - password
+  - username
+  sourceFiles: null
+  namespace: harbor-dev
+  secretName: harbor-admin-credentials
+  argocdApp: harbor-oci-registry-dev
+  notes: null
+  repo: https://github.com/obaven/harbor-oci-registry.git
+  path: overlays/dev/sealed_secrets/sealed-harbor-admin-credentials.yaml
+  accessUsers: null
+- name: harbor
+  env: stage
+  vaultwarden:
+    cipherId: 041f64e9-75fd-4944-8163-fe45764a595c
+    collectionIds:
+    - ebd07933-11b4-4e57-82af-28bbef09c5d6
+    collections: null
+    folder: Harbor
+    notes: null
+  keys:
+  - password
+  - username
+  sourceFiles: null
+  namespace: harbor-stage
+  secretName: harbor-admin-credentials
+  argocdApp: harbor-oci-registry-stage
+  notes: null
+  repo: https://github.com/obaven/harbor-oci-registry.git
+  path: overlays/stage/sealed_secrets/sealed-harbor-admin-credentials.yaml
+  accessUsers: null
+- name: forgejo
+  env: stage
+  vaultwarden:
+    cipherId: 90f42156-b4e7-4e19-aa7c-83acc4aacbd4
+    collectionIds:
+    - 53c33c9a-4a54-45a2-932f-173c75f0a469
+    collections: null
+    folder: Forgejo
+    notes: null
+  keys:
+  - password
+  - username
+  sourceFiles: null
+  namespace: forgejo-stage
+  secretName: forgejo-admin-credentials
+  argocdApp: forgejo-stage
+  notes: null
+  repo: https://github.com/obaven/forgejo.git
+  path: overlays/stage/sealed_secrets/sealed-forgejo-admin-credentials.yaml
+  accessUsers: null
+- name: harbor-database-password
+  env: prod
+  vaultwarden:
+    cipherId: 6791dcc8-3425-40cf-b24c-5362097ae6ca
+    collectionIds:
+    - 6547e076-4f26-4d8b-80b3-c4ba20d2a3db
+    collections: null
+    folder: Harbor
+    notes: null
+  keys:
+  - POSTGRES_PASSWORD
+  sourceFiles: null
+  namespace: harbor-prod
+  secretName: harbor-database-password
+  argocdApp: harbor-oci-registry-prod
+  notes: null
+  repo: https://github.com/obaven/harbor-oci-registry.git
+  path: overlays/prod/sealed_secrets/sealed-harbor-database-password.yaml
+  accessUsers: null
+- name: harbor-redis-password
+  env: prod
+  vaultwarden:
+    cipherId: 8c3054c4-527e-4bf8-8fcf-1356e4b8abc7
+    collectionIds:
+    - 95987c70-ee37-41dc-9a96-7c4c6c41642a
+    collections: null
+    folder: Harbor
+    notes: null
+  keys:
+  - REDIS_PASSWORD
+  sourceFiles: null
+  namespace: harbor-prod
+  secretName: harbor-redis-password
+  argocdApp: harbor-oci-registry-prod
+  notes: null
+  repo: https://github.com/obaven/harbor-oci-registry.git
+  path: overlays/prod/sealed_secrets/sealed-harbor-redis-password.yaml
+  accessUsers: null
+- name: harbor-secret-key
+  env: prod
+  vaultwarden:
+    cipherId: e1403d17-cfae-4662-aac2-211a0bb723bf
+    collectionIds:
+    - ebd07933-11b4-4e57-82af-28bbef09c5d6
+    collections: null
+    folder: Harbor
+    notes: null
+  keys:
+  - secretKey
+  sourceFiles: null
+  namespace: harbor-prod
+  secretName: harbor-secret-key
+  argocdApp: harbor-oci-registry-prod
+  notes: null
+  repo: https://github.com/obaven/harbor-oci-registry.git
+  path: overlays/prod/sealed_secrets/sealed-harbor-secret-key.yaml
+  accessUsers: null
+- name: redis-harbor-user-credentials
+  env: prod
+  vaultwarden:
+    cipherId: d753ed12-ff18-47cb-9c05-1151c10e4013
+    collectionIds:
+    - 95987c70-ee37-41dc-9a96-7c4c6c41642a
+    collections: null
+    folder: Harbor
+    notes: null
+  keys:
+  - password
+  - username
+  sourceFiles: null
+  namespace: harbor-oci-registry-prod
+  secretName: redis-harbor-user-credentials
+  argocdApp: harbor-oci-registry-prod
+  notes: null
+  repo: https://github.com/obaven/harbor-oci-registry.git
+  path: overlays/prod/sealed_secrets/sealed-redis-harbor-user-credentials.yaml
+  accessUsers: null
+- name: postgresql-harbor-user-credentials
+  env: prod
+  vaultwarden:
+    cipherId: b3c61366-72c3-4842-a701-d46e87d04af5
+    collectionIds:
+    - 6547e076-4f26-4d8b-80b3-c4ba20d2a3db
+    collections: null
+    folder: Harbor
+    notes: null
+  keys:
+  - password
+  - username
+  sourceFiles: null
+  namespace: harbor-oci-registry-prod
+  secretName: postgresql-harbor-user-credentials
+  argocdApp: harbor-oci-registry-prod
+  notes: null
+  repo: https://github.com/obaven/harbor-oci-registry.git
+  path: overlays/prod/components/sealed_secrets/sealed-postgresql-harbor-user-credentials.yaml
+  accessUsers: null
+- name: postgresql-forgejo-user-credentials
+  env: prod
+  vaultwarden:
+    cipherId: 77c304c6-0cda-4069-a737-141c0ca1443e
+    collectionIds:
+    - 6547e076-4f26-4d8b-80b3-c4ba20d2a3db
+    collections: null
+    folder: Forgejo
+    notes: null
+  keys:
+  - password
+  - username
+  sourceFiles: null
+  namespace: forgejo-prod
+  secretName: postgresql-forgejo-user-credentials
+  argocdApp: forgejo-prod
+  notes: null
+  repo: https://github.com/obaven/forgejo.git
+  path: overlays/prod/components/sealed_secrets/sealed-postgresql-forgejo-user-credentials.yaml
+  accessUsers: null
+- name: forgejo-oidc-credentials
+  env: prod
+  vaultwarden:
+    cipherId: 39f44642-f6ed-4dc0-b35e-23d1cfd43711
+    collectionIds:
+    - fdb8d418-f020-43ec-8902-81fed5523e4b
+    collections: null
+    folder: Forgejo
+    notes: null
+  keys:
+  - OIDC_CLIENT_ID
+  - OIDC_CLIENT_SECRET
+  sourceFiles: null
+  namespace: forgejo-prod
+  secretName: forgejo-oidc-credentials
+  argocdApp: forgejo-prod
+  notes: null
+  repo: https://github.com/obaven/forgejo.git
+  path: overlays/prod/networking/sealed-forgejo-oidc-credentials.yaml
+  accessUsers: null
+- name: postgresql-forgejo-user-credentials
+  env: dev
+  vaultwarden:
+    cipherId: 3f0497a7-6b08-4627-9777-0c9c2f52c178
+    collectionIds:
+    - 094b0be9-83b0-4f5e-ba10-4a8b10688619
+    collections: null
+    folder: Forgejo
+    notes: null
+  keys:
+  - password
+  - username
+  sourceFiles: null
+  namespace: forgejo-dev
+  secretName: postgresql-forgejo-user-credentials
+  argocdApp: forgejo-dev
+  notes: null
+  repo: https://github.com/obaven/forgejo.git
+  path: overlays/dev/components/sealed_secrets/sealed-postgresql-forgejo-user-credentials.yaml
+  accessUsers: null
+- name: redis-forgejo-user-credentials
+  env: stage
+  vaultwarden:
+    cipherId: f8f3504a-3646-4164-91c2-caf154611617
+    collectionIds:
+    - 0afca7a2-2a10-4a2e-a0c1-b84334456e4c
+    collections: null
+    folder: Forgejo
+    notes: null
+  keys:
+  - password
+  - username
+  sourceFiles: null
+  namespace: forgejo-stage
+  secretName: redis-forgejo-user-credentials
+  argocdApp: forgejo-stage
+  notes: null
+  repo: https://github.com/obaven/forgejo.git
+  path: overlays/stage/sealed_secrets/sealed-redis-forgejo-user-credentials.yaml
+  accessUsers: null
+- name: prod-argocd-github-obaven-argocd-creds
+  env: prod
+  vaultwarden:
+    cipherId: cd9b1b2e-674f-4e4b-98df-e4304a3f875f
+    collectionIds:
+    - 1d606569-7c86-48ba-af38-ad9220d3546a
+    collections: null
+    folder: ArgoCD
+    notes: null
+  keys:
+  - password
+  - username
+  - url
+  sourceFiles: null
+  namespace: argocd
+  secretName: prod-argocd-github-obaven-argocd-creds
+  argocdApp: argocd
+  notes: null
+  repo: https://github.com/obaven/argocd.git
+  path: overlays/main/sealed_secrets/prod/sealed-prod-argocd-github-obaven-argocd-creds.yaml
+  accessUsers: null
+- name: prod-argocd-github-obaven-authentik-creds
+  env: prod
+  vaultwarden:
+    cipherId: e3194777-651a-4990-96b7-ebec4da830eb
+    collectionIds:
+    - 1d606569-7c86-48ba-af38-ad9220d3546a
+    collections: null
+    folder: Authentik
+    notes: null
+  keys:
+  - password
+  - username
+  - url
+  sourceFiles: null
+  namespace: argocd
+  secretName: prod-argocd-github-obaven-authentik-creds
+  argocdApp: argocd
+  notes: null
+  repo: https://github.com/obaven/argocd.git
+  path: overlays/main/sealed_secrets/prod/sealed-prod-argocd-github-obaven-authentik-creds.yaml
+  accessUsers: null
+- name: prod-argocd-github-obaven-forgejo-creds
+  env: prod
+  vaultwarden:
+    cipherId: ea9949e0-7013-424a-9dd7-176c2215a110
+    collectionIds:
+    - 1d606569-7c86-48ba-af38-ad9220d3546a
+    collections: null
+    folder: Forgejo
+    notes: null
+  keys:
+  - password
+  - username
+  - url
+  sourceFiles: null
+  namespace: argocd
+  secretName: prod-argocd-github-obaven-forgejo-creds
+  argocdApp: argocd
+  notes: null
+  repo: https://github.com/obaven/argocd.git
+  path: overlays/main/sealed_secrets/prod/sealed-prod-argocd-github-obaven-forgejo-creds.yaml
+  accessUsers: null
+- name: prod-argocd-github-obaven-obaven-fs-creds
+  env: prod
+  vaultwarden:
+    cipherId: 628431e2-43c1-4827-9b26-7a35386a77f9
+    collectionIds:
+    - 1d606569-7c86-48ba-af38-ad9220d3546a
+    collections: null
+    folder: ArgoCD
+    notes: null
+  keys:
+  - password
+  - username
+  - url
+  sourceFiles: null
+  namespace: argocd
+  secretName: prod-argocd-github-obaven-obaven-fs-creds
+  argocdApp: argocd
+  notes: null
+  repo: https://github.com/obaven/argocd.git
+  path: overlays/main/sealed_secrets/prod/sealed-prod-argocd-github-obaven-obaven-fs-creds.yaml
+  accessUsers: null
+- name: prod-argocd-github-obaven-postgres-creds
+  env: prod
+  vaultwarden:
+    cipherId: 08acc322-126c-4f2b-b3d1-f6cbfb967d9c
+    collectionIds:
+    - 1d606569-7c86-48ba-af38-ad9220d3546a
+    collections: null
+    folder: Postgres
+    notes: null
+  keys:
+  - password
+  - username
+  - url
+  sourceFiles: null
+  namespace: argocd
+  secretName: prod-argocd-github-obaven-postgres-creds
+  argocdApp: argocd
+  notes: null
+  repo: https://github.com/obaven/argocd.git
+  path: overlays/main/sealed_secrets/prod/sealed-prod-argocd-github-obaven-postgres-creds.yaml
+  accessUsers: null
+- name: prod-argocd-github-obaven-redis-creds
+  env: prod
+  vaultwarden:
+    cipherId: 1021ef34-99dc-49ca-b491-84528f5ef837
+    collectionIds:
+    - 1d606569-7c86-48ba-af38-ad9220d3546a
+    collections: null
+    folder: Redis
+    notes: null
+  keys:
+  - password
+  - username
+  - url
+  sourceFiles: null
+  namespace: argocd
+  secretName: prod-argocd-github-obaven-redis-creds
+  argocdApp: argocd
+  notes: null
+  repo: https://github.com/obaven/argocd.git
+  path: overlays/main/sealed_secrets/prod/sealed-prod-argocd-github-obaven-redis-creds.yaml
+  accessUsers: null
+- name: prod-argocd-github-obaven-sealed-secrets-creds
+  env: prod
+  vaultwarden:
+    cipherId: a190e96b-e9c1-49c1-be95-a3a08c992a37
+    collectionIds:
+    - 1d606569-7c86-48ba-af38-ad9220d3546a
+    collections: null
+    folder: ArgoCD
+    notes: null
+  keys:
+  - password
+  - username
+  - url
+  sourceFiles: null
+  namespace: argocd
+  secretName: prod-argocd-github-obaven-sealed-secrets-creds
+  argocdApp: argocd
+  notes: null
+  repo: https://github.com/obaven/argocd.git
+  path: overlays/main/sealed_secrets/prod/sealed-prod-argocd-github-obaven-sealed-secrets-creds.yaml
+  accessUsers: null
+- name: dev-argocd-github-obaven-forgejo-creds
+  env: dev
+  vaultwarden:
+    cipherId: cc04a345-5f7d-4954-80b0-f9f21dae4c89
+    collectionIds:
+    - cdb372ad-d2c6-48dd-93fa-d73f8f65028d
+    collections: null
+    folder: Forgejo
+    notes: null
+  keys:
+  - password
+  - username
+  - url
+  sourceFiles: null
+  namespace: argocd
+  secretName: dev-argocd-github-obaven-forgejo-creds
+  argocdApp: argocd
+  notes: null
+  repo: https://github.com/obaven/argocd.git
+  path: overlays/main/sealed_secrets/dev/sealed-dev-argocd-github-obaven-forgejo-creds.yaml
+  accessUsers: null
+- name: dev-argocd-github-obaven-obaven-fs-creds
+  env: dev
+  vaultwarden:
+    cipherId: 14be6e8b-7ccb-4c0c-a4e7-d3600554cfdd
+    collectionIds:
+    - cdb372ad-d2c6-48dd-93fa-d73f8f65028d
+    collections: null
+    folder: ArgoCD
+    notes: null
+  keys:
+  - password
+  - username
+  - url
+  sourceFiles: null
+  namespace: argocd
+  secretName: dev-argocd-github-obaven-obaven-fs-creds
+  argocdApp: argocd
+  notes: null
+  repo: https://github.com/obaven/argocd.git
+  path: overlays/main/sealed_secrets/dev/sealed-dev-argocd-github-obaven-obaven-fs-creds.yaml
+  accessUsers: null
+- name: dev-argocd-github-obaven-postgres-creds
+  env: dev
+  vaultwarden:
+    cipherId: 92fa3788-1f33-4131-ad9d-8426a7fd0271
+    collectionIds:
+    - cdb372ad-d2c6-48dd-93fa-d73f8f65028d
+    collections: null
+    folder: Postgres
+    notes: null
+  keys:
+  - password
+  - username
+  - url
+  sourceFiles: null
+  namespace: argocd
+  secretName: dev-argocd-github-obaven-postgres-creds
+  argocdApp: argocd
+  notes: null
+  repo: https://github.com/obaven/argocd.git
+  path: overlays/main/sealed_secrets/dev/sealed-dev-argocd-github-obaven-postgres-creds.yaml
+  accessUsers: null
+- name: dev-argocd-github-obaven-redis-creds
+  env: dev
+  vaultwarden:
+    cipherId: b3c1f4c1-3a51-49b6-a9d3-f08b319a918c
+    collectionIds:
+    - cdb372ad-d2c6-48dd-93fa-d73f8f65028d
+    collections: null
+    folder: Redis
+    notes: null
+  keys:
+  - password
+  - username
+  - url
+  sourceFiles: null
+  namespace: argocd
+  secretName: dev-argocd-github-obaven-redis-creds
+  argocdApp: argocd
+  notes: null
+  repo: https://github.com/obaven/argocd.git
+  path: overlays/main/sealed_secrets/dev/sealed-dev-argocd-github-obaven-redis-creds.yaml
+  accessUsers: null
+- name: dev-argocd-github-obaven-sealed-secrets-creds
+  env: dev
+  vaultwarden:
+    cipherId: 9bc0ba3c-b99b-4737-bb7e-477f142976ab
+    collectionIds:
+    - cdb372ad-d2c6-48dd-93fa-d73f8f65028d
+    collections: null
+    folder: ArgoCD
+    notes: null
+  keys:
+  - password
+  - username
+  - url
+  sourceFiles: null
+  namespace: argocd
+  secretName: dev-argocd-github-obaven-sealed-secrets-creds
+  argocdApp: argocd
+  notes: null
+  repo: https://github.com/obaven/argocd.git
+  path: overlays/main/sealed_secrets/dev/sealed-dev-argocd-github-obaven-sealed-secrets-creds.yaml
+  accessUsers: null
+- name: stage-argocd-github-your-org-gitops-creds
+  env: stage
+  vaultwarden:
+    cipherId: 679e7aae-87a6-4a02-b1f1-b86018dcbbcb
+    collectionIds:
+    - db8989d4-54fb-4606-b5d0-e350a7d83961
+    collections: null
+    folder: ArgoCD
+    notes: null
+  keys:
+  - password
+  - username
+  - url
+  sourceFiles: null
+  namespace: argocd
+  secretName: stage-argocd-github-your-org-gitops-creds
+  argocdApp: argocd
+  notes: null
+  repo: https://github.com/obaven/argocd.git
+  path: overlays/main/sealed_secrets/stage/sealed-stage-argocd-github-your-org-gitops-creds.yaml
+  accessUsers: null
+- name: postgresql-authentik-user-credentials
+  env: prod
+  vaultwarden:
+    cipherId: fcb2106a-d59b-448f-8ad0-8854520ce5be
+    collectionIds:
+    - 1ee437f3-aade-4aab-80e6-eeeb8b31e969
+    collections: null
+    folder: Authentik
+    notes: Populated from K8s
+  keys:
+  - password
+  - username
+  sourceFiles: null
+  namespace: authentik-prod
+  secretName: postgresql-authentik-user-credentials
+  argocdApp: authentik-prod
+  notes: null
+  repo: https://github.com/obaven/authentik.git
+  path: overlays/prod/components/sealed_secrets/sealed-postgresql-authentik-user-credentials.yaml
+  accessUsers: null
+- name: postgresql-authentik-user-credentials
+  env: dev
+  vaultwarden:
+    cipherId: 439caa9a-c5c8-4b85-a89d-7a950974e2fa
+    collectionIds:
+    - 2aab4003-b924-4849-9ebc-5ae645425c80
+    collections: null
+    folder: Authentik
+    notes: Populated from K8s
+  keys:
+  - password
+  - username
+  sourceFiles: null
+  namespace: authentik-dev
+  secretName: postgresql-authentik-user-credentials
+  argocdApp: authentik-dev
+  notes: null
+  repo: https://github.com/obaven/authentik.git
+  path: overlays/dev/components/sealed_secrets/sealed-postgresql-authentik-user-credentials.yaml
+  accessUsers: null
+- name: redis-authentik-user-credentials
+  env: prod
+  vaultwarden:
+    cipherId: ba2c8a36-e7c0-42c0-bb75-006fa0d476c4
+    collectionIds:
+    - 1ee437f3-aade-4aab-80e6-eeeb8b31e969
+    collections: null
+    folder: Authentik
+    notes: Populated from K8s
+  keys:
+  - password
+  - username
+  sourceFiles: null
+  namespace: redis-prod
+  secretName: redis-authentik-user-credentials
+  argocdApp: redis-prod
+  notes: null
+  repo: https://github.com/obaven/redis.git
+  path: overlays/prod/components/sealed_secrets/sealed-redis-authentik-user-credentials.yaml
+  accessUsers: null
+- name: redis-authentik-user-credentials
+  env: dev
+  vaultwarden:
+    cipherId: 62db9c84-8c02-4f67-9465-437504e17894
+    collectionIds:
+    - 2aab4003-b924-4849-9ebc-5ae645425c80
+    collections: null
+    folder: Authentik
+    notes: Populated from K8s
+  keys:
+  - password
+  - username
+  sourceFiles: null
+  namespace: redis-dev
+  secretName: redis-authentik-user-credentials
+  argocdApp: redis-dev
+  notes: null
+  repo: https://github.com/obaven/redis.git
+  path: overlays/dev/components/sealed_secrets/sealed-redis-authentik-user-credentials.yaml
+  accessUsers: null
+- name: mailserver-dns-records
+  env: prod
+  vaultwarden:
+    cipherId: 0a9abe8d-674b-4709-9655-70ed2a18f93b
+    collectionIds: null
+    collections:
+    - Mailserver
+    folder: Mailserver
+    notes: DNS Records
+  keys:
+  - DKIM_RECORD
+  - DMARC_RECORD
+  sourceFiles: null
+  namespace: mailserver-prod
+  secretName: mailserver-dns-records
+  argocdApp: mailserver-prod
+  notes: null
+  repo: https://github.com/obaven/mailserver.git
+  path: overlays/prod/components/sealed_secrets/sealed-mailserver-dns-records.yaml
+  accessUsers: null

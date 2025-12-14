@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: node-fixer
+  namespace: vaultwarden-prod
+spec:
+  template:
+    spec:
+      hostPID: true
+      containers:
+      - name: fixer
+        image: busybox
+        command:
+        - sh
+        - -c
+        - |
+          sysctl -w fs.inotify.max_user_watches=524288
+          sysctl -w fs.inotify.max_user_instances=8192
+          sysctl -a | grep inotify
+        securityContext:
+          privileged: true
+      restartPolicy: Never

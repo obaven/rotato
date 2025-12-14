@@ -1,0 +1,110 @@
+digraph ControlSystem {
+    rankdir = LR;
+    splines = ortho;
+    bgcolor = "#fcfdfd";
+    node [fontname = "Helvetica"; fontsize = 12; style = "filled,rounded"; shape = box;];
+    edge [fontname = "Helvetica"; fontsize = 10; color = "#555555";];
+    
+    // Inputs
+    Reference [label = "Reference (r)\nRotation Policy\n{ schedule: '30d', keys: [...] }";fillcolor = "#fff3cd";color = "#ffc107";penwidth = 2;];
+    Disturbance [label = "Disturbance (d)\n(Drift, Manual Edit)";shape = plaintext;fontcolor = "#dc3545";style = "";];
+    
+    // The Feedback Loop
+    subgraph cluster_loop {
+        label = "Closed-Loop Control System with Dead Time";
+        fontname = "Helvetica-Bold";
+        fontsize = 14;
+        style = dashed;
+        color = "#6c757d";
+        bgcolor = "#f8f9fa";
+        
+        // Summing Junctions
+        Sum1 [label = "+";shape = circle;width = 0.4;fixedsize = true;style = filled;fillcolor = white;color = "#555555";];
+        
+        // Controller (The Rotator)
+        subgraph cluster_controller {
+            label = "Controller C(s)\n(Rotator Application)";
+            style = filled;
+            color = "#d4edda";
+            fillcolor = "#d4edda";
+            
+            subgraph cluster_logic {
+                label = "Logic (Pure Core)";
+                style = filled;
+                color = "#ffffff";
+                fillcolor = "#f0fff4";
+                
+                Estimator [label = "State Estimator (x̂)\n(logic::parsing)\n[ find_existing_value ]";fillcolor = "#ffffff";color = "#28a745";];
+                ControlLaw [label = "Control Law K(x)\n(logic::resolution)\n[ resolve_value / folder ]";fillcolor = "#ffffff";color = "#28a745";];
+                PolicyCheck [label = "Policy Check\n(logic::policy)\n[ should_rotate ]";fillcolor = "#ffffff";color = "#28a745";];
+            }
+            
+            subgraph cluster_orchestrator {
+                label = "Orchestrator";
+                style = dashed;
+                color = "#aaaaaa";
+                
+                RotateCmd [label = "Coordinator\n(commands::rotate)";fillcolor = "#eeeeee";];
+            }
+        }
+        
+        // The Plant (The Infrastructure)
+        subgraph cluster_plant {
+            label = "Plant P(s)";
+            style = filled;
+            color = "#f8d7da";
+            fillcolor = "#f8d7da";
+            
+            Actuator [label = "Actuator\n(infra::git / infra::k8s)\n[ git commit / kubeseal ]";fillcolor = "#ffffff";color = "#dc3545";];
+            Delay [label = "Transport Delay (e^-sT)\n(ArgoCD Sync)\n[ Pending 3m ]";fillcolor = "#ffffff";color = "#dc3545";style = "filled,dashed";];
+            Process [label = "System Process\n(Vaultwarden / K8s)\n[ HTTP API ]";fillcolor = "#ffffff";color = "#dc3545";];
+        }
+        
+        // Sensor
+        Sensor [label = "Sensor H(s)\n(infra::fs / infra::k8s)\n[ discovery / fetch ]";fillcolor = "#cce5ff";color = "#007bff";];
+    }
+    
+    // Forward Path
+    Reference -> Sum1 [label = " r(t)"; color = "#ffc107"; fontcolor = "#856404";];
+    Sum1 -> RotateCmd [label = " e(t)";];
+    
+    // Orchestration flow
+    RotateCmd -> Estimator [label = " parse(y)"; style = dotted;];
+    Estimator -> PolicyCheck [label = " x̂"; style = dotted;];
+    PolicyCheck -> ControlLaw [label = " valid?"; style = dotted;];
+    ControlLaw -> RotateCmd [label = " u(t)"; style = dotted;];
+    
+    RotateCmd -> Actuator [label = " u(t)\n(SealedSecret)"; color = "#28a745"; penwidth = 2; fontcolor = "#155724";];
+    
+    // Plant Internal
+    Actuator -> Delay [label = " Pending";];
+    Delay -> Process [label = " Applied";];
+    
+    // Feedback path
+    Process -> Sensor [label = " y(t)\n(Secret Age)";];
+    Sensor -> Sum1 [label = " y_m(t)"; arrowhead = empty; style = dashed;];
+    
+    // Disturbance Effect
+    Disturbance -> Process [label = " Noise"; style = dotted; color = "#dc3545"; fontcolor = "#dc3545";];
+    
+    // LEGEND
+    subgraph cluster_legend {
+        label = "Control System Legend";
+        fontsize = 12;
+        fontname = "Helvetica-Bold";
+        style = solid;
+        color = black;
+        bgcolor = white;
+        node [shape = plain; style = "";];
+        
+        key [label = <<table border="0" cellborder="1" cellspacing="0" cellpadding="8">
+            <tr><td bgcolor="#e9ecef"><b>Key</b></td><td bgcolor="#e9ecef"><b>Signal</b></td><td bgcolor="#e9ecef"><b>Control Meaning</b></td><td bgcolor="#e9ecef"><b>Implementation Data</b></td></tr>
+            <tr><td bgcolor="#fff3cd"></td><td><b>r(t)</b></td><td>Reference Input</td><td><i>RotationManifest</i> (YAML)</td></tr>
+            <tr><td bgcolor="#ffffff"></td><td><b>e(t)</b></td><td>Error Signal</td><td><i>Vec&lt;SecretDefinition&gt;</i> (Diff)</td></tr>
+            <tr><td bgcolor="#d4edda"></td><td><b>u(t)</b></td><td>Control Input</td><td><i>SealedSecret</i> (Manifest)</td></tr>
+            <tr><td bgcolor="#f8d7da"></td><td><b>y(t)</b></td><td>System Output</td><td><i>Cipher &amp; Folder</i> (Vaultwarden JSON)</td></tr>
+            <tr><td><font color="#dc3545">---</font></td><td><b>d(t)</b></td><td>Disturbance</td><td>Manual Edits / Expired Keys</td></tr>
+            <tr><td><font color="#dc3545">- - -</font></td><td><b>e<sup>-sT</sup></b></td><td>Dead Time</td><td>GitOps Sync Latency</td></tr>
+            </table>>;];
+    }
+}

@@ -1,0 +1,51 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: rotator-helper
+  namespace: vaultwarden-prod
+spec:
+  schedule: "0 3 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: rotator
+            image: harbor.obaven.org/library/rotato:latest
+            imagePullPolicy: Always
+            env:
+            - name: VAULTWARDEN_URL
+              value: "https://vaultwarden.obaven.org"
+            - name: VAULTWARDEN_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: vaultwarden-admin-user
+                  key: username
+            - name: VAULTWARDEN_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: vaultwarden-admin-user # Assuming client_id is here or separate
+                  key: client_id
+            - name: VAULTWARDEN_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: vaultwarden-admin-user
+                  key: client_secret
+            - name: GIT_REPO_URL
+              value: "git@github.com:obaven/gitops.git"
+            volumeMounts:
+            - name: ssh-key
+              mountPath: /etc/secret-volume
+              readOnly: true
+            - name: repo-volume
+              mountPath: /app
+          restartPolicy: OnFailure
+          volumes:
+          - name: ssh-key
+            secret:
+              secretName: rotator-git-ssh-key
+              items:
+              - key: private_key
+                path: ssh-privatekey
+          - name: repo-volume
+            emptyDir: {}

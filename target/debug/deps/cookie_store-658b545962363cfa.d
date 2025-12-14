@@ -1,0 +1,11 @@
+/home/jdean/gitops/apps/security/rotato/target/debug/deps/libcookie_store-658b545962363cfa.rmeta: /home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cookie_store-0.20.0/src/lib.rs /home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cookie_store-0.20.0/src/cookie.rs /home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cookie_store-0.20.0/src/cookie_domain.rs /home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cookie_store-0.20.0/src/cookie_expiration.rs /home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cookie_store-0.20.0/src/cookie_path.rs /home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cookie_store-0.20.0/src/cookie_store.rs /home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cookie_store-0.20.0/src/utils.rs
+
+/home/jdean/gitops/apps/security/rotato/target/debug/deps/cookie_store-658b545962363cfa.d: /home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cookie_store-0.20.0/src/lib.rs /home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cookie_store-0.20.0/src/cookie.rs /home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cookie_store-0.20.0/src/cookie_domain.rs /home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cookie_store-0.20.0/src/cookie_expiration.rs /home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cookie_store-0.20.0/src/cookie_path.rs /home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cookie_store-0.20.0/src/cookie_store.rs /home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cookie_store-0.20.0/src/utils.rs
+
+/home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cookie_store-0.20.0/src/lib.rs:
+/home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cookie_store-0.20.0/src/cookie.rs:
+/home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cookie_store-0.20.0/src/cookie_domain.rs:
+/home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cookie_store-0.20.0/src/cookie_expiration.rs:
+/home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cookie_store-0.20.0/src/cookie_path.rs:
+/home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cookie_store-0.20.0/src/cookie_store.rs:
+/home/jdean/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cookie_store-0.20.0/src/utils.rs:
