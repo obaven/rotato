@@ -1,7 +1,0 @@
-version: 1
-entries:
-- model: authentik_core.user
-  identifiers:
-    username: admin
-  attrs:
-    password: pbkdf2_sha256$260000$6qK00zDukL4e$gHPWJa/rv3+bBolcfMutlkU9W/mschGWYfw/d3i22P4=
