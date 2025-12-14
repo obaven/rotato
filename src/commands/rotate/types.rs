@@ -5,7 +5,7 @@ pub struct RotateArgs {
     #[arg(long, default_value = "data/config.yaml")]
     pub config: String,
     
-    #[arg(long, help = "Scan for rotation.yaml files instead of using config.yaml", default_value = "true")]
+    #[arg(long, help = "Scan for rotation.yaml files instead of using config.yaml", default_value = "false")]
     pub scan: bool,
     
     #[arg(long, help = "Run in dry-run mode (no changes committed)")]
